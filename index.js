@@ -15,7 +15,11 @@ function showBoard() {
 
   for (let i = 0; i < randomWord.length; i++) {
     const letterDiv = document.createElement('div');
+
     letterDiv.textContent = ''; 
+    letterDiv.style.display = "flex"; 
+    letterDiv.style.justifyContent = "center";
+    letterDiv.style.alignItems = "center";
     letterDiv.style.border = '2px solid green';
     letterDiv.style.margin = '10px';
     letterDiv.style.height = '50px';
@@ -23,6 +27,7 @@ function showBoard() {
     board.appendChild(letterDiv);
   }
   const guessDiv = document.createElement('input');
+
     guessDiv.style.border = "none";
     guessDiv.style.borderBottom = '2px solid red';
     guessDiv.style.outline = "none";
