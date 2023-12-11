@@ -1,12 +1,14 @@
 const animals = ['dog', 'duck', 'cat', 'fish', 'dolphin'];
 const board = document.querySelector('.board');
 let randomWord;
-let guesses = 6;
+let guesses =  6;
 let guessedRight = 0;
 let guessLeft = document.querySelector('.guessesLeft');
-let guessedletters = document.querySelector('.guessedLetters')
+let guessedLetters = document.querySelector('.guessedLetters');
 const letterToGuess = document.querySelector('.letterToGuess');
 const btn = document.querySelector('.start').addEventListener('click', showBoard);
+
+guessedLetters = []; 
 
 function showBoard() {
   randomWord = animals[Math.floor(Math.random() * animals.length)];
@@ -32,17 +34,19 @@ function showBoard() {
       checkLetter(guessedLetter);
       setTimeout(() => {
         event.target.value = ''; // Clear the input field after 2 seconds (adjust the time as needed)
-      }, 1000);
+      }, 400);
       guessedletters.push().innerHTML = guessedLetter
     });
     
     letterToGuess.appendChild(guessDiv);
+    guessDiv.focus(); 
   guessLeft.innerHTML = guesses;
  
   
 }
 
 function checkLetter(guessedLetter) {
+  
   let correctGuess = false;
   for (let i = 0; i < randomWord.length; i++) {
     if (randomWord[i] === guessedLetter.toLowerCase()) {
@@ -52,12 +56,13 @@ function checkLetter(guessedLetter) {
       boardDivs[i].textContent = guessedLetter;
     }
   }
+  
   if (!correctGuess) {
     guesses--;
-    guessLeft.innerHTML = guesses;
+    guessedLetters.for
+    guessLeft.innerHTML = `You have ${guesses} guesses left`;
     let hangman = document.querySelector('.picHolder');
     hangman.src = "images/h" + guesses + ".png";
-    
     if (guesses < 1 || 0){
       board.style.visibility = "hidden"
       guessLeft.innerHTML = `You loose! The word was ${randomWord}`;
@@ -65,9 +70,10 @@ function checkLetter(guessedLetter) {
        window.location.reload()
       }, 2000);
      }
+    
    }
   if (correctGuess) {
-   guessLeft.innerHTML = guesses;
+   guessLeft.innerHTML = `You have ${guesses} guesses left`;
    
   if (guessedRight === randomWord.length){
     board.style.visibility = "hidden"
@@ -77,7 +83,7 @@ setTimeout(() => {
  }, 1500);
    }
   } 
-
+  
 }
 
 
