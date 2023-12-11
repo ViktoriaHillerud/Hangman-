@@ -1,7 +1,7 @@
 const animals = ['dog', 'duck', 'cat', 'fish', 'dolphin'];
 const board = document.querySelector('.board');
 let randomWord;
-let guesses =  6;
+let guesses = 0;
 let guessedRight = 0;
 let guessLeft = document.querySelector('.guessesLeft');
 let guessedLetters = document.querySelector('.guessedLetters');
@@ -45,7 +45,7 @@ function showBoard() {
     
     letterToGuess.appendChild(guessDiv);
     guessDiv.focus(); 
-  guessLeft.innerHTML = guesses;
+
  
   
 }
@@ -62,13 +62,12 @@ function checkLetter(guessedLetter) {
     }
   }
   
-  if (!correctGuess) {
-    guesses--;
-    guessedLetters.for
-    guessLeft.innerHTML = `You have ${guesses} guesses left`;
+  if (!correctGuess && guesses < 6) {
+    guesses++;
+    guessLeft.innerHTML = `Du har gissat fel ${guesses} gånger`;
     let hangman = document.querySelector('.picHolder');
     hangman.src = "images/h" + guesses + ".png";
-    if (guesses < 1 || 0){
+    if (guesses >= 6){
       board.style.visibility = "hidden"
       guessLeft.innerHTML = `You loose! The word was ${randomWord}`;
       setTimeout(() => {
@@ -78,7 +77,6 @@ function checkLetter(guessedLetter) {
     
    }
   if (correctGuess) {
-   guessLeft.innerHTML = `You have ${guesses} guesses left`;
    
   if (guessedRight === randomWord.length){
     board.style.visibility = "hidden"
